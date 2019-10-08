@@ -1,4 +1,4 @@
-# event_planner
+# blog
 
 ## Project setup
 ```
