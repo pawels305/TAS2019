@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title>Event Planner</title>
+  </head>
+  <body>
+    <div id="app">
+      <style>
+        body {
+          overflow-y: scroll;
+          padding: 0;
+          margin: 0;
+          background-color: #f5eee6;
+        }
+
+        #nav {
+          background-color: #f7f7fe;
+          border-bottom: 1px solid lightgrey;
+          height: 3rem;
+        }
+
+        .spinner::before {
+          content: '';
+          box-sizing: border-box;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 30px;
+          height: 30px;
+          margin-top: -10px;
+          margin-left: -10px;
+          border-radius: 50%;
+          border: 2px solid #ccc;
+          border-top-color: #000;
+          animation: spinner 0.8s linear infinite;
+        }
+
+        @keyframes spinner {
+          to { transform: rotate(360deg); }
+        }
+      </style>
+      <div id="nav">
+        <noscript>
+          <strong>Please enable JavaScript to continue.</strong>
+        </noscript>
+      </div>
+      <div class="spinner"></div>
+    </div>
+  </body>
+</html>

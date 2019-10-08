@@ -1,0 +1,148 @@
+#login_site {
+  #logo {
+    font-family: 'Kalam', sans-serif;
+    text-align: center;
+    font-size: 64px;
+    color: var(--color-dark-red);
+    margin-top: 80px;
+
+    @media (max-width: 410px) {
+      font-size: 48px;
+    }
+  }
+
+  .login {
+    background-color: #fff;
+    width: 250px;
+
+    @media (max-width: 350px) {
+      width: 200px;
+    }
+
+    padding: 50px;
+    padding-top: 35px;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 3px 3px 30px 5px #00193135;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--color-dark);
+  }
+
+  .strike {
+    padding-top: 20px;
+    padding-bottom: 8px;
+    color: var(--color-dark);
+    overflow: hidden;
+    white-space: nowrap;
+
+    & > span {
+      position: relative;
+      display: inline-block;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 250px;
+        height: 1px;
+        background: #adac97;
+      }
+
+      &::before {
+        right: 100%;
+        margin-right: 15px;
+      }
+
+      &::after {
+        left: 100%;
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .message {
+    font-size: 12px;
+
+    &--success {
+      color: green;
+    }
+
+    &--warn {
+      color: orange;
+    }
+
+    &--error {
+      color: red;
+    }
+  }
+
+  input[type=text],
+  input[type=password],
+  input[type=email] {
+    background-color: #efefef;
+    color: #666;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 8px 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    outline: none;
+
+    &:focus {
+      background-color: var(--color-bg);
+      border: 2px solid var(--color-dark-red);
+      box-shadow: 0 0 10px 2px rgba(204, 204, 204, 0.9);
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    background-color: var(--color-dark-red);
+    font-size: 16px;
+    color: #fff;
+    padding: 15px 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      background-color: var(--color-light-blue);
+      color: var(--color-dark-red);
+    }
+
+    &:focus {
+      box-shadow: 0 0 16px 4px rgba(204, 204, 204, 0.9);
+    }
+  }
+
+  .register {
+    margin-top: 15px;
+  }
+
+  a {
+    color: var(--color-dark-red);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-red);
+    }
+
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}

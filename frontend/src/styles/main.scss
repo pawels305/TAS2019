@@ -1,0 +1,16 @@
+:root {
+  --color-bg: #f5eee6;
+  --color-red: #df1000;
+  --color-selago: #f7f7fe;
+  --color-light-blue: #ccd9de;
+  --color-dark: #001931;
+  --color-dark-red: #a64452;
+  --color-light-grey: #E0E0E0;
+  --color-dark-grey: #C2C2C2;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Kalam&display=swap&subset=latin-ext");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.1/animate.min.css");
+@import "./log.scss";
+@import "./tileList.scss";
