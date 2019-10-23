@@ -1,7 +1,7 @@
 // @ts-check
 const mongoose = require('mongoose')
 
-const config = require('./config')
+const config = require('./config.template.js')
 const app = require('./app')
 
 mongoose.connect(config.mongoUri, {
