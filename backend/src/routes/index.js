@@ -2,6 +2,7 @@
 const express = require('express')
 
 const auth = require('./users')
+const blog = require('./blog')
 const verifyLogin = require('../middleware/verifyLogin')
 
 const router = express.Router()
@@ -15,5 +16,11 @@ router.patch('/user', verifyLogin, auth.updateUser)
 router.get('/user/verify/:token', auth.verifyEmail)
 router.post('/user/sendReset', auth.sendReset)
 router.post('/user/resetPassword', auth.resetPassword)
+
+router.get('/blog/', verifyLogin, blog.list)
+router.post('/blog/', verifyLogin, blog.insert)
+router.get('/blog/:blogId', verifyLogin, blog.get)
+router.put('/blog/:blogId', verifyLogin, blog.update)
+router.delete('/blog/:blogId', verifyLogin, blog.delete)
 
 module.exports = router
