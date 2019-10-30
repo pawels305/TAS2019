@@ -23,7 +23,8 @@ const BlogSchema = mongoose.Schema({
   posts: {
     type: [],
 	required: false
-  })
+  }
+})
 
 const Blog = mongoose.model('Blog', BlogSchema)
 

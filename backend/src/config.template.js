@@ -26,7 +26,7 @@ const development = {
   cookieSecret: 'secret!',
   mailConfig: {},
   mailSender: 'Test <test@test.com>',
-  skipEmailVerification: false,
+  skipEmailVerification: true,
   useCors: false
 }
 
