@@ -22,11 +22,11 @@ const development = {
   backendUrl: 'http://localhost:3000',
   frontendUrl: 'http://localhost:8080',
   expressPort: 3000,
-  mongoUri: 'mongodb+srv://planner:kpquHyWJhYxp0E39@eventplannercluster-xrvjx.mongodb.net/tas',
+  mongoUri: '',
   cookieSecret: 'secret!',
   mailConfig: {},
   mailSender: 'Test <test@test.com>',
-  skipEmailVerification: false,
+  skipEmailVerification: true,
   useCors: false
 }
 
