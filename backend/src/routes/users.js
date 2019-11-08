@@ -3,7 +3,7 @@
 const jwt = require('jsonwebtoken')
 const { User } = require('../models')
 const mailer = require('../services/mailer')
-const config = require('../config.template.js')
+const config = require('../config')
 const { validatePassword } = require('../services/crypto')
 
 /*

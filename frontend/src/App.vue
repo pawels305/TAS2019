@@ -21,9 +21,9 @@
         <template v-if="loggedIn">
           <router-link
             class="nav__btn"
-            to="/events"
+            to="/blogs"
           >
-            Moje wydarzenia
+            Moje blogi
           </router-link>
           <div
             class="nav__btn"
@@ -47,9 +47,9 @@
         <template v-if="loggedIn">
           <router-link
             class="mobile-nav__btn"
-            to="/events"
+            to="/blogs"
           >
-            Moje wydarzenia
+            Moje blogi
           </router-link>
           <div
             class="mobile-nav__btn"

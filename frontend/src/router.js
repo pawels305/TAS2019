@@ -8,6 +8,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+
   scrollBehavior () {
     return { x: 0, y: 0 }
   },
@@ -25,22 +26,20 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "login" */ './views/Login.vue')
     },
     {
-      path: '/login/resetPassword',
-      name: 'resetPasswordEmail',
-      meta: { loginNotRequired: true, blockIfLoggedIn: true },
-      component: () => import(/* webpackChunkName: "login" */ './views/ResetPasswordEmail.vue')
-    },
-    {
-      path: '/login/resetPassword/:token',
-      name: 'resetPassword',
-      meta: { loginNotRequired: true, blockIfLoggedIn: true },
-      component: () => import(/* webpackChunkName: "login" */ './views/ResetPassword.vue')
-    },
-    {
       path: '/register',
       name: 'register',
       meta: { loginNotRequired: true, blockIfLoggedIn: true },
       component: () => import(/* webpackChunkName: "register" */ './views/Register.vue')
+    },
+    {
+      path: '/blogs',
+      name: 'blogs',
+      component: () => import(/* webpackChunkName: "blogs" */ './views/BlogList.vue')
+    },
+    {
+      path: '/blogs/create',
+      name: 'createBlog',
+      component: () => import(/* webpackChunkName: "blogs" */ './views/CreateBlog.vue')
     }
   ]
 })
@@ -58,7 +57,7 @@ router.beforeEach(async (to, from, next) => {
 
     return next('/login')
   } else if (to.matched.some(record => record.meta.blockIfLoggedIn)) {
-    return next('/events')
+    return next('/blogs')
   }
 
   next()

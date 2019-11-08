@@ -98,5 +98,17 @@ export default {
    */
   resetPassword (data) {
     return this.execute('POST', `/user/resetPassword`, data)
+  },
+  /**
+   * Creates new blog
+   * @param {object} data
+   * @param {string} data.name
+   */
+  createBlog (data) {
+    return this.execute('POST', `/blog`, data)
+  },
+  /** List user blogs */
+  listBlogs () {
+    return this.execute('GET', `/blog`)
   }
 }

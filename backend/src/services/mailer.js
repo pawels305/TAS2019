@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer')
-const config = require('../config.template.js')
+const config = require('../config')
 const jwt = require('jsonwebtoken')
 
 const transporter = nodemailer.createTransport(config.mailConfig)

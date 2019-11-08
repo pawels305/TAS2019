@@ -9,21 +9,10 @@ const BlogSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true
-  },
-  username: {
-    type: String,
-    required: false,
-    unique: true
-  },
-   creationDate: {
-    type: Date,
-    required: false,
-    unique: false
-  },
-  posts: {
-    type: [],
-	required: false
   }
+}, {
+  versionKey: false,
+  timestamps: true
 })
 
 const Blog = mongoose.model('Blog', BlogSchema)

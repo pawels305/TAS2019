@@ -5,7 +5,7 @@ const SQLiteStore = require('connect-sqlite3')(session)
 const cors = require('cors')
 const path = require('path')
 
-const config = require('./config.template.js')
+const config = require('./config')
 const router = require('./routes')
 
 const app = express()

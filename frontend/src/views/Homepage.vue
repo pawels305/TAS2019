@@ -1,10 +1,17 @@
 <template>
   <div class="homepage">
+    <div class="button">
+      <router-link
+        tag="div"
+        :to="{ name: 'createBlog' }"
+      >
+        STWÓRZ BLOGA
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
-import api from '../api'
 
 export default {
   name: 'Homepage',

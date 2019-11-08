@@ -31,11 +31,6 @@
           Zaloguj się
         </button>
       </form>
-      <div class="register">
-        <router-link :to="{ name: 'resetPasswordEmail' }">
-          Zapomniałem hasło
-        </router-link>
-      </div>
       <div class="strike">
         <span>Nie masz konta?</span>
       </div>
@@ -71,7 +66,7 @@ export default {
       }
 
       this.$store.dispatch('login', response.data)
-      this.$router.push({ name: 'events' })
+      this.$router.push({ name: 'homepage' })
     }
   }
 }
