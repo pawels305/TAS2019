@@ -1,21 +1,24 @@
 <template>
-  <div>
+  <div class="container">
     <div
       v-if="blogs.length === 0"
       class="modules modules--warn"
     >
       <p class="modules__warn">
-        Dodaj bloga żeby działać na tej strone
+        Żaden blog jeszcze nie powstał.
       </p>
     </div>
     <div
       v-for="blog in blogs"
-      :key="blog.id"
+      :key="blog._id"
       :data="blog"
+      class="blog"
     >
-      <p class="modules__warn">
-        {{ blog.name }}
-      </p>
+      <router-link :to="{ name: 'blog', params: { blogId: blog._id }}">
+        <p class="modules__warn">
+          {{ blog.name }}
+        </p>
+      </router-link>
     </div>
   </div>
 </template>

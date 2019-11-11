@@ -23,6 +23,12 @@
             class="nav__btn"
             to="/blogs"
           >
+            Blogi
+          </router-link>
+          <router-link
+            class="nav__btn"
+            to="/blogs/user"
+          >
             Moje blogi
           </router-link>
           <div
@@ -47,9 +53,15 @@
         <template v-if="loggedIn">
           <router-link
             class="mobile-nav__btn"
-            to="/blogs"
+            to="/blogs/user"
           >
             Moje blogi
+          </router-link>
+          <router-link
+            class="mobile-nav__btn"
+            to="/blogs"
+          >
+            Blogi
           </router-link>
           <div
             class="mobile-nav__btn"

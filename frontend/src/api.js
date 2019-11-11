@@ -107,7 +107,34 @@ export default {
   createBlog (data) {
     return this.execute('POST', `/blog`, data)
   },
-  /** List user blogs */
+  /**
+   * Gets blog data
+   * @param {string} blogID
+   */
+  getBlog (blogID) {
+    return this.execute('GET', `/blog/${blogID}`)
+  },
+
+  /**
+   * Updates blog
+   * @param {string} blogID
+   * @param {object} data
+   * @param {string} [data.name]
+   */
+  updateBlog (blogID, data) {
+    return this.execute('PUT', `/blog/${blogID}`, data)
+  },
+  /**
+   * Deletes blog
+   * @param {string} blogID
+   */
+  deleteBlog (blogID) {
+    return this.execute('DELETE', `/blog/${blogID}`)
+  },
+  /**
+   * list blogs
+   * @param {string} all
+   */
   listBlogs () {
     return this.execute('GET', `/blog`)
   }

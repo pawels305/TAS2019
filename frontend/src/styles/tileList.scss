@@ -1,3 +1,53 @@
+p {
+  font-size: 24px;
+  color: orange;
+}
+
+p:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+  justify-items: stretch;
+  align-items: start;
+  margin-left: auto;
+  margin-right: auto;
+
+  .message {
+    font-size: 32px;
+    grid-column-start: 1;
+    grid-column-end: end;
+    grid-row-start: 2;
+    color: orange;
+    justify-self: center;
+  }
+
+  .message:hover {
+    cursor: pointer;
+    color: red;
+  }
+
+  .blog {
+    display: grid;
+    border: solid black 2px;
+    height: 150px;
+    background-color: white;
+    text-align: center;
+    float: left;
+    margin: 5px;
+
+    .icon {
+      justify-self: center;
+      align-self: center;
+      cursor: pointer;
+    }
+  }
+}
+
 .modules {
   display: grid;
   grid-template-columns: repeat(auto-fill, 370px);

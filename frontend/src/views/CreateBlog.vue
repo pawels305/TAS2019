@@ -52,7 +52,7 @@ export default {
       })
 
       if (response.status === 200) {
-        this.$router.push({ name: 'blogs', params: { blogId: response.data._id } })
+        this.$router.push({ name: 'blog', params: { blogId: response.data._id } })
       } else this.error = response.data.error
     }
   }

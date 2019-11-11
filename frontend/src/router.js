@@ -37,9 +37,19 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "blogs" */ './views/BlogList.vue')
     },
     {
+      path: '/blogs/user',
+      name: 'userBlogs',
+      component: () => import(/* webpackChunkName: "blogs" */ './views/UserBlogList.vue')
+    },
+    {
       path: '/blogs/create',
       name: 'createBlog',
       component: () => import(/* webpackChunkName: "blogs" */ './views/CreateBlog.vue')
+    },
+    {
+      path: '/blogs/:blogId',
+      name: 'blog',
+      component: () => import(/* webpackChunkName: "blog" */ './views/Blog.vue')
     }
   ]
 })

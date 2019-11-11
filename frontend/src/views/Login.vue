@@ -64,7 +64,6 @@ export default {
       if (response.status !== 200) {
         return (this.error = response.data.message)
       }
-
       this.$store.dispatch('login', response.data)
       this.$router.push({ name: 'homepage' })
     }
