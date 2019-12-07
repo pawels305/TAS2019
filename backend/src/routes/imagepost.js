@@ -5,11 +5,18 @@ module.exports.insert = async function addImagePost(req, res) {
   const { blogId } = req.params
   const { image, description } = req.body
 
+  console.log(blogId)
+  console.log(image)
+  console.log(description)
+
   if (!image) {
     return res.status(400).json({
       message: 'Incomplete request'
     })
   }
+
+  // var encImg = image.toString('base64');
+
   const imagePost = new ImagePost({ blogId, image, description})
 
   try {

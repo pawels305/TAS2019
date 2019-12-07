@@ -137,5 +137,25 @@ export default {
    */
   listBlogs () {
     return this.execute('GET', `/blog`)
+  },
+
+  addImagePost (blogID, data) {
+    return this.execute('POST', `/imagepost/${blogID}`, data)
+  },
+
+  getImagePost (imageID) {
+    return this.execute('GET', `/imagepost/${imageID}`)
+  },
+
+  updateImagePost (imageID, data) {
+    return this.execute('PUT', `/imagepost/${imageID}`, data)
+  },
+
+  deleteImagePost (imageID) {
+    return this.execute('DELETE', `/imagepost/${imageID}`)
+  },
+
+  listImagePostsByBlog (blogID) {
+    return this.execute('GET', `/imagepost/${blogID}`)
   }
 }

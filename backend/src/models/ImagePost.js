@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const ImagePostSchema = mongoose.Schema({
     blogId: 
-        { type: Number, required: true },
+        { type: String, required: true },
     img: 
         { data: Buffer, contentType: String },
     description:
