@@ -6,7 +6,7 @@ module.exports.insert = async function addImagePost(req, res) {
   const { image, description } = req.body
 
   console.log(blogId)
-  console.log(image)
+  // console.log(image)
   console.log(description)
 
   if (!image) {
@@ -15,9 +15,11 @@ module.exports.insert = async function addImagePost(req, res) {
     })
   }
 
-  // var encImg = image.toString('base64');
+  let imagePost= new ImagePost({ });
+  imagePost.img.data=image;
+  imagePost.img.contentType='image/png';
 
-  const imagePost = new ImagePost({ blogId, image, description})
+  // const imagePost = new ImagePost({ blogId, image, description})
 
   try {
     await imagePost.save()

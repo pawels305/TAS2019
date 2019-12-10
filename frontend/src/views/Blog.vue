@@ -15,8 +15,8 @@
     <div>
       <span> Add image </span>
       <form v-on:submit="uploadImage($event)">
-        <input type="file" accept="image/*" ref="image-input">
-        <input type="text" ref="description-input">
+        <input type="file" accept="image/*" ref="image-input" @change="onImageChange()">
+        <input type="text" ref="description-input" @change="onTextChange()">
         <button type="submit">Add image</button>
       </form>
     </div>
@@ -91,22 +91,39 @@ export default {
       this.modules.splice(index, 1)
     },
 
+    onImageChange() {
+        let image = this.$refs["image-input"].files[0]
+        this.image = image
+    },
+
+    onTextChange() {
+        let text = this.$refs["description-input"].value
+        this.description = text
+    },
+
     async uploadImage(event) {
-    event.preventDefault()
-    let data = {
-      'image': this.$refs["image-input"].files[0],
-      'description': this.$refs["description-input"].value
-    } 
+      event.preventDefault();
+      // let data = {
+      //   'image': this.$refs["image-input"].files[0],
+      //   'description': this.$refs["description-input"].value
+      // } 
 
-    console.log(data)
+      await this.image.stream().getReader().read().then(({ done, value }) => {this.image = value})
 
-    const [ image ] = await Promise.all([
-      api.addImagePost(this.blogId, data)
-    ])
+      let data = {
+      'image': this.image,
+      'description': this.description
+      }
 
-    if (image.status !== 200) console.log(image.request)
-    console.log(this.images.length)
-  }
+      console.log(data)
+
+      const [ image ] = await Promise.all([
+        api.addImagePost(this.blogId, data)
+      ])
+
+      if (image.status !== 200) console.log(image.request)
+      // console.log(this.images.length)
+    }
   }
 }
 </script>

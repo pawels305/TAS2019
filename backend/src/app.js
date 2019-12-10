@@ -8,7 +8,10 @@ const path = require('path')
 const config = require('./config')
 const router = require('./routes')
 
+var bodyParser = require('body-parser')
+
 const app = express()
+app.use(bodyParser.json({ limit: '10mb' }))
 
 if (config.useCors) {
   app.use(
