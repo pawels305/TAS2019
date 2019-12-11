@@ -143,9 +143,9 @@ export default {
     return this.execute('POST', `/imagepost/${blogID}`, data)
   },
 
-  getImagePost (imageID) {
-    return this.execute('GET', `/imagepost/${imageID}`)
-  },
+  // getImagePost (imageID) {
+  //   return this.execute('GET', `/imagepost/${imageID}`)
+  // },
 
   updateImagePost (imageID, data) {
     return this.execute('PUT', `/imagepost/${imageID}`, data)

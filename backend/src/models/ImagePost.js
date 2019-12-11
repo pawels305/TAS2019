@@ -4,7 +4,7 @@ const ImagePostSchema = mongoose.Schema({
     blogId: 
         { type: String, required: true },
     img: 
-        { data: Buffer, contentType: String },
+        { data: String, contentType: String },
     description:
         { type: String, required: false }
 })

@@ -26,7 +26,7 @@ router.delete('/blog/:blogId', verifyLogin, blog.delete)
 router.get('/blog/', verifyLogin, blog.list)
 
 router.post('/imagepost/:blogId', verifyLogin, imagePost.insert)
-router.get('/imagepost/:imagepostId', verifyLogin, imagePost.get)
+// router.get('/imagepost/:imagepostId', verifyLogin, imagePost.get)
 router.put('/imagepost/:imagepostId', verifyLogin, imagePost.update)
 router.delete('/imagepost/:imagepostId', verifyLogin, imagePost.delete)
 router.get('/imagepost/:blogId', verifyLogin, imagePost.list)

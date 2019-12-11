@@ -5,9 +5,9 @@ module.exports.insert = async function addImagePost(req, res) {
   const { blogId } = req.params
   const { image, description } = req.body
 
-  console.log(blogId)
+  // console.log(blogId)
   // console.log(image)
-  console.log(description)
+  // console.log(description)
 
   if (!image) {
     return res.status(400).json({
@@ -16,10 +16,10 @@ module.exports.insert = async function addImagePost(req, res) {
   }
 
   let imagePost= new ImagePost({ });
+  imagePost.blogId=blogId;
   imagePost.img.data=image;
-  imagePost.img.contentType='image/png';
-
-  // const imagePost = new ImagePost({ blogId, image, description})
+  imagePost.img.contentType='image/jpg';
+  imagePost.description=description;
 
   try {
     await imagePost.save()
@@ -33,20 +33,20 @@ module.exports.insert = async function addImagePost(req, res) {
   res.status(200).json(imagePost)
 }
 
-module.exports.get = async function getImagePost(req, res) {
-  const { imageId } = req.params
+// module.exports.get = async function getImagePost(req, res) {
+//   const { imageId } = req.params
 
-  const image = await ImagePost.findOne({
-    _id: imageId
-  }).exec()
+//   const image = await ImagePost.findOne({
+//     _id: imageId
+//   }).exec()
 
-  if (!image) {
-    return res.status(404).json({
-      message: 'Image does not exist'
-    })
-  }
-  res.status(200).json(image)
-}
+//   if (!image) {
+//     return res.status(404).json({
+//       message: 'Image does not exist'
+//     })
+//   }
+//   res.status(200).json(image)
+// }
 
 module.exports.update = async function updateImagePost(req, res) {
     const { imageId } = req.params
@@ -78,10 +78,10 @@ module.exports.update = async function updateImagePost(req, res) {
 }
 
 module.exports.delete = async function deleteImagePost(req, res) {
-  const { imageId } = req.params
+  const { imagepostId } = req.params
 
   const image = await ImagePost.findOne({
-    _id: imageId
+    _id: imagepostId
   }).exec()
 
   if (!image) {
@@ -98,7 +98,7 @@ module.exports.delete = async function deleteImagePost(req, res) {
 module.exports.list = async function listImagePostsByBlog(req, res) {
   const { blogId } = req.params
 
-  const image = await ImagePost.find().select({ "blogId": blogId }).exec()
+  const image = await ImagePost.find({ "blogId": blogId }).exec()
 
   res.status(200).json(image)
 }

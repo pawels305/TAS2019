@@ -9,26 +9,32 @@
         Powrót
       </router-link>
     </div>
-    <p>
+    <p class="content">
       <span> {{ blogName }} </span>
     </p>
-    <div>
+    <div class="content">
       <span> Add image </span>
       <form v-on:submit="uploadImage($event)">
         <input type="file" accept="image/*" ref="image-input" @change="onImageChange()">
-        <input type="text" ref="description-input" @change="onTextChange()">
+        <br />
+        <input type="text" ref="description-input" placeholder="Add description" @change="onTextChange()">
+        <br />
         <button type="submit">Add image</button>
+        <br /><br />
       </form>
     </div>
-    <div v-if="images.length !== 0">
+    <div v-if="images.length !== 0" class="content">
       <span> Images </span>
       <div>
         <ul>
           <li v-for="image in images" v-bind:key="image._id">
-              <img :src="image.img">
+              <img :src="image.img.data">
+              <br />
               <span>{{ image.description }}</span>
-              <button>Update image</button>
-              <button>Delete image</button>
+              <br />
+              <!-- <button>Update image</button> -->
+              <button @click="deleteImage(image._id)">Delete image</button>
+              <br /><br />
           </li>
         </ul>
       </div>
@@ -55,6 +61,8 @@ export default {
       api.listImagePostsByBlog(to.params.blogId)
     ])
 
+    console.log(images.data)
+
     if (blog.status !== 200) next({ name: 'blogs' })
 
     next(vm => {
@@ -63,7 +71,7 @@ export default {
         vm.prevRoutename = 'userBlogs'
       }
       vm.blogName = blog.data.name
-      vm.images = images
+      vm.images = images.data
     })
   },
   async beforeRouteUpdate (to, from, next) {
@@ -101,6 +109,14 @@ export default {
         this.description = text
     },
 
+    async deleteImage(id) {
+      const [ image ] = await Promise.all([
+        api.deleteImagePost(id)
+      ])
+      if (image.status !== 200) console.log(image.request)
+      window.location.reload()
+    },
+
     async uploadImage(event) {
       event.preventDefault();
       // let data = {
@@ -108,14 +124,19 @@ export default {
       //   'description': this.$refs["description-input"].value
       // } 
 
-      await this.image.stream().getReader().read().then(({ done, value }) => {this.image = value})
+      const toBase64 = file => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+      });
+
+      this.image = await toBase64(this.image)
 
       let data = {
       'image': this.image,
       'description': this.description
       }
-
-      console.log(data)
 
       const [ image ] = await Promise.all([
         api.addImagePost(this.blogId, data)
@@ -123,7 +144,17 @@ export default {
 
       if (image.status !== 200) console.log(image.request)
       // console.log(this.images.length)
+      window.location.reload()
     }
   }
 }
 </script>
+<style>
+  li {
+      list-style-type: none;
+  }
+  .content {
+  max-width: 500px;
+  margin: auto;
+  }
+</style>
