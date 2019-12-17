@@ -48,7 +48,7 @@ p:hover {
   }
 }
 
-.modules {
+.blogs {
   display: grid;
   grid-template-columns: repeat(auto-fill, 370px);
   justify-content: center;
@@ -82,7 +82,7 @@ p:hover {
   justify-content: center;
 }
 
-.modules--warn {
+.blogs--warn {
   justify-content: center;
   flex-flow: column;
 }

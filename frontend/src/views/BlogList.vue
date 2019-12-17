@@ -2,9 +2,9 @@
   <div class="container">
     <div
       v-if="blogs.length === 0"
-      class="modules modules--warn"
+      class="blogs blogs--warn"
     >
-      <p class="modules__warn">
+      <p class="blogs__warn">
         Żaden blog jeszcze nie powstał.
       </p>
     </div>
@@ -15,7 +15,7 @@
       class="blog"
     >
       <router-link :to="{ name: 'blog', params: { blogId: blog._id }}">
-        <p class="modules__warn">
+        <p class="blogs__warn">
           {{ blog.name }}
         </p>
       </router-link>
