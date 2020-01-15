@@ -134,9 +134,10 @@ export default {
   /**
    * list blogs
    * @param {string} all
+   * @param {number} page
    */
-  listBlogs () {
-    return this.execute('GET', `/blog`)
+  listBlogs (page) {
+    return this.execute('GET', `/blog/?page=${page}`)
   },
 
   addImagePost (blogID, data) {

@@ -91,7 +91,27 @@ module.exports.delete = async function deleteBlog (req, res) {
 }
 
 module.exports.list = async function listBlogs (req, res) {
-  // const userId = req.session.user.id
-  const blog = await Blog.find().exec()
-  res.status(200).json(blog)
+  const userId = req.session.user.id
+  const { page } = req.query
+  console.log(page)
+  if (!page) {
+    return res.status(400).json({
+      message: 'Incomplete request'
+    })
+  }
+  if (parseInt(page) === -1) {
+    const blog = await Blog.find({
+      userId: userId
+    }).exec()
+    res.status(200).json(blog)
+  } else {
+    const blogs = await Blog.find().exec()
+    var maxNumberBlogs = page * 10
+
+    if (maxNumberBlogs > blogs.length) {
+      maxNumberBlogs = blogs.length
+    }
+    console.log(maxNumberBlogs + '-' + blogs.length)
+    res.status(200).json({ blogs: blogs.slice((page - 1) * 10, maxNumberBlogs), length: blogs.length })
+  }
 }

@@ -53,7 +53,7 @@ export default {
 
       if (response.status === 200) {
         this.$router.push({ name: 'blog', params: { blogId: response.data._id } })
-      } else this.error = response.data.error
+      } else this.error = 'Wymyśl inną nazwę bloga'
     }
   }
 }
