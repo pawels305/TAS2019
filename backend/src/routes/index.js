@@ -17,6 +17,8 @@ router.patch('/user', verifyLogin, auth.updateUser)
 router.get('/user/verify/:token', auth.verifyEmail)
 router.post('/user/sendReset', auth.sendReset)
 router.post('/user/resetPassword', auth.resetPassword)
+router.patch('/user', auth.updateUser)
+router.delete('/user/:tag', verifyLogin, auth.deleteTag)
 
 router.post('/blog/', verifyLogin, blog.insert)
 router.get('/blog/:blogId', verifyLogin, blog.get)

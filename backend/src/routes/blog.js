@@ -3,14 +3,14 @@ const { Blog } = require('../models')
 
 module.exports.insert = async function createBlog (req, res) {
   const userId = req.session.user.id
-  const { name } = req.body
+  const { name, tag } = req.body
 
   if (!name) {
     return res.status(400).json({
       message: 'Incomplete request'
     })
   }
-  const blog = new Blog({ userId, name })
+  const blog = new Blog({ userId, name, tag })
 
   try {
     await blog.save()

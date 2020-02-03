@@ -10,7 +10,10 @@
       </router-link>
     </div>
     <p>
-      <span> {{ blogName }} </span>
+      <span> {{ blogName }}</span>
+    </p>
+    <p>
+      <span> tag: {{ blogTag }}</span>
     </p>
   </div>
 </template>
@@ -22,7 +25,8 @@ export default {
     return {
       prevRoutename: null,
       blogId: this.$route.params.blogId,
-      blogName: ''
+      blogName: '',
+      tag: this.$route.params.tag
     }
   },
   async beforeRouteEnter (to, from, next) {
@@ -38,6 +42,7 @@ export default {
         vm.prevRoutename = 'userBlogs'
       }
       vm.blogName = blog.data.name
+      vm.blogTag = blog.data.tag
     })
   },
   async beforeRouteUpdate (to, from, next) {

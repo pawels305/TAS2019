@@ -73,13 +73,18 @@ export default {
   /**
    * Updates logged in user
    * @param {object} data
-   * @param {string} [data.currentPassword]
-   * @param {string} [data.password]
-   * @param {string} [data.username]
-   * @param {string} [data.email]
+   * @param {string} [data.tag]
    */
   updateUser (data) {
     return this.execute('PATCH', `/user`, data)
+  },
+
+  /**
+   * Deletes tag chosen by user
+   * @param {string} tag
+   */
+  deleteTag (tag) {
+    return this.execute('DELETE', `/user/${tag}`)
   },
 
   /**
@@ -99,14 +104,17 @@ export default {
   resetPassword (data) {
     return this.execute('POST', `/user/resetPassword`, data)
   },
+
   /**
    * Creates new blog
    * @param {object} data
    * @param {string} data.name
+   * @param {string} data.tag
    */
   createBlog (data) {
     return this.execute('POST', `/blog`, data)
   },
+
   /**
    * Gets blog data
    * @param {string} blogID
@@ -124,6 +132,7 @@ export default {
   updateBlog (blogID, data) {
     return this.execute('PUT', `/blog/${blogID}`, data)
   },
+
   /**
    * Deletes blog
    * @param {string} blogID
@@ -131,6 +140,7 @@ export default {
   deleteBlog (blogID) {
     return this.execute('DELETE', `/blog/${blogID}`)
   },
+
   /**
    * list blogs
    * @param {string} all

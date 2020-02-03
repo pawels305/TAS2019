@@ -22,6 +22,14 @@
             placeholder="Nazwa Bloga"
             require
           >
+          <input
+            id="blogName"
+            v-model="tag"
+            type="text"
+            tag="tag"
+            placeholder="tag"
+            require
+          >
           <p class="message message--error">
             {{ error }}
           </p>
@@ -48,7 +56,8 @@ export default {
   methods: {
     async createBlog () {
       const response = await api.createBlog({
-        name: this.blogName
+        name: this.blogName,
+        tag: this.tag
       })
 
       if (response.status === 200) {

@@ -22,10 +22,12 @@ const development = {
   backendUrl: 'http://localhost:3000',
   frontendUrl: 'http://localhost:8080',
   expressPort: 3000,
+  //podmienic na template
   mongoUri: 'mongodb://localhost:27017/planner',
   cookieSecret: 'secret!',
   mailConfig: {},
   mailSender: 'Test <test@test.com>',
+  // true
   skipEmailVerification: false,
   useCors: false
 }
