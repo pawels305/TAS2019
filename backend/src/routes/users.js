@@ -14,7 +14,7 @@ const { validatePassword } = require('../services/crypto')
  */
 module.exports.register = async (req, res) => {
   const { username, email, password } = req.body
-
+  const tags = []
   // check required parameters
   if (!username || !password || !email) {
     return res.status(400).json({
@@ -31,7 +31,7 @@ module.exports.register = async (req, res) => {
     })
   }
 
-  const user = new User({ email, username, password })
+  const user = new User({ email, username, password, tags })
 
   try {
     await user.save()
@@ -111,7 +111,8 @@ module.exports.login = async (req, res) => {
   req.session.user = {
     id: user._id,
     role: user.role,
-    username: user.username
+    username: user.username,
+	tags: user.tags
   }
 
   return res.status(200).json(req.session.user)
@@ -124,92 +125,100 @@ module.exports.logout = (req, res) => {
 
 module.exports.getUser = (req, res) => {
   // TODO: Sanitize user object
+  if (!req.session) return res.status(500).end()
+  
+  const user = User.findById(req.session.user.id)
+  if (!user) return res.status(500).end()
+  
+  const userObj = {
+    id: user.id,
+    username: user.username,
+	email: user.email,
+	tags: user.tags
+  }
+  
   res.status(200).json(req.session.user)
 }
 
 module.exports.updateUser = async (req, res) => {
-  const { currentPassword, username, password, email } = req.body
-
+  const { tag } = req.body
+  const userId = req.session.user.id
+  
   const user = await User.findOne({
     _id: req.session.user.id
   }).exec()
-
+ 
   if (!user) {
     req.session.destroy()
     return res.status(500).end()
   }
 
-  if (username) {
-    user.username = username
-
+  const update = await User.findOneAndUpdate({
+	  _id: userId
+	},{
+	  $push: { tags: tag}
+	}
+	).exec()
+ 
     try {
       await user.save()
     } catch (err) {
       if (err.code === 11000) {
         return res.status(400).json({
-          message: 'This username is already used'
+          message: 'This tag is already used'
         })
       }
-
+ 
       return res.status(500).json({
-        message: 'Could not change username'
+        message: 'Could not add tag'
       })
     }
+  
+	req.session.user.tags.push(tag)
+//	console.log(req.session.user.tags)
+  
+  res.status(200).end()
+}
 
-    req.session.user.username = username
-  } else {
-    if (!(password || email)) {
-      return res.status(400).json({
-        message: 'Incomplete request'
-      })
-    }
-
-    if (!(currentPassword && await validatePassword(currentPassword, user.password))) {
-      return res.status(401).json({
-        message: 'Invalid password'
-      })
-    }
-
-    if (email) {
-      if (!validateEmail(email)) {
-        return res.status(400).json({
-          message: 'Email must be valid'
-        })
-      }
-
-      user.email = email
-      user.isVerified = false
-
-      try {
-        await user.save()
-
-        if (!config.skipEmailVerification) {
-          mailer.sendVerificationEmail(user.username, email)
-        }
-      } catch (err) {
-        if (err.code === 11000) {
-          return res.status(400).json({
-            message: 'This email is already used'
-          })
-        }
-
-        return res.status(500).json({
-          message: 'Could not change email'
-        })
-      }
-    } else if (password) {
-      user.password = password
-
-      try {
-        await user.save()
-      } catch (err) {
-        res.status(500).json({
-          message: 'Could not update password'
-        })
-      }
-    }
+module.exports.deleteTag = async (req, res) => {
+  const { tag } = req.params
+  const userId = req.session.user.id
+  console.log(tag)
+  
+  const user = await User.findOne({
+    _id: req.session.user.id
+  }).exec()
+ 
+  if (!user) {
+    req.session.destroy()
+    return res.status(500).end()
   }
 
+  const update = await User.findOneAndUpdate({
+	  _id: userId
+	},{
+	  $pull: { tags: tag}
+	}
+	).exec()
+ 
+    try {
+      await user.save()
+    } catch (err) {
+      if (err.code === 11000) {
+        return res.status(400).json({
+          //
+        })
+      }
+ 
+      return res.status(500).json({
+        message: 'Could not delete tag'
+      })
+    }
+
+    const index = req.session.user.tags.indexOf(tag)
+    req.session.user.tags.splice(index, 1)
+//	console.log(req.session.user.tags)
+  
   res.status(200).end()
 }
 

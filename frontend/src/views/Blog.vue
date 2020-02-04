@@ -9,8 +9,11 @@
         Powrót
       </router-link>
     </div>
-    <p class="content">
-      <span> {{ blogName }} </span>
+    <p>
+      <span> {{ blogName }}</span>
+    </p>
+    <p>
+      <span> tag: {{ blogTag }}</span>
     </p>
     <div class="content">
       <span> Add image </span>
@@ -50,7 +53,11 @@ export default {
       prevRoutename: null,
       blogId: this.$route.params.blogId,
       blogName: '',
+<<<<<<< HEAD
       images: []
+=======
+      tag: this.$route.params.tag
+>>>>>>> newsfeed
     }
   },
   async beforeRouteEnter (to, from, next) {
@@ -71,7 +78,11 @@ export default {
         vm.prevRoutename = 'userBlogs'
       }
       vm.blogName = blog.data.name
+<<<<<<< HEAD
       vm.images = images.data
+=======
+      vm.blogTag = blog.data.tag
+>>>>>>> newsfeed
     })
   },
   async beforeRouteUpdate (to, from, next) {
@@ -122,7 +133,7 @@ export default {
       // let data = {
       //   'image': this.$refs["image-input"].files[0],
       //   'description': this.$refs["description-input"].value
-      // } 
+      // }
 
       const toBase64 = file => new Promise((resolve, reject) => {
       const reader = new FileReader();

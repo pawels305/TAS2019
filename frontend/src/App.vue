@@ -31,6 +31,18 @@
           >
             Moje blogi
           </router-link>
+          <router-link
+            class="nav__btn"
+            to="/tags"
+          >
+            Moje tagi
+          </router-link>
+          <router-link
+            class="nav__btn"
+            to="/newsfeed"
+          >
+            Newsfeed
+          </router-link>
           <div
             class="nav__btn"
             @click="logout"

@@ -50,6 +50,21 @@ const router = new Router({
       path: '/blogs/:blogId',
       name: 'blog',
       component: () => import(/* webpackChunkName: "blog" */ './views/Blog.vue')
+    },
+    {
+      path: '/tags',
+      name: 'tags',
+      component: () => import(/* webpackChunkName: "blogs" */ './views/TagList.vue')
+    },
+    {
+      path: '/tags/add',
+      name: 'addTag',
+      component: () => import(/* webpackChunkName: "blogs" */ './views/AddTag.vue')
+    },
+    {
+      path: '/newsfeed',
+      name: 'newsfeed',
+      component: () => import(/* webpackChunkName: "blogs" */ './views/UserNewsfeed.vue')
     }
   ]
 })
