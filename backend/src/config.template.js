@@ -22,6 +22,7 @@ const development = {
   backendUrl: 'http://localhost:3000',
   frontendUrl: 'http://localhost:8080',
   expressPort: 3000,
+  //podmienic na template
   mongoUri: 'mongodb+srv://tas:tas@cluster0-hh9pd.mongodb.net/tas?retryWrites=true&w=majority',
   cookieSecret: 'secret!',
   mailConfig: {},

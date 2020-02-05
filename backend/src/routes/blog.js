@@ -104,14 +104,17 @@ module.exports.list = async function listBlogs (req, res) {
       userId: userId
     }).exec()
     res.status(200).json(blog)
+  } else if (parseInt(page) === -2) {
+    const blogs = await Blog.find().exec()
+    res.status(200).json(blogs)
   } else {
     const blogs = await Blog.find().exec()
     var maxNumberBlogs = page * 10
-
+ 
     if (maxNumberBlogs > blogs.length) {
       maxNumberBlogs = blogs.length
     }
-    console.log(maxNumberBlogs + '-' + blogs.length)
+//    console.log(maxNumberBlogs + '-' + blogs.length)
     res.status(200).json({ blogs: blogs.slice((page - 1) * 10, maxNumberBlogs), length: blogs.length })
   }
 }

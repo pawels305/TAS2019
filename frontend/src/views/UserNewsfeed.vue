@@ -34,7 +34,7 @@ export default {
     }
   },
   async beforeRouteEnter (to, from, next) {
-    const response = await api.listBlogs()
+    const response = await api.listBlogs(-2)
     const user = await api.getUser()
     next(vm => {
       vm.user = user.data

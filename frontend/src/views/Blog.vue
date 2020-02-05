@@ -53,11 +53,8 @@ export default {
       prevRoutename: null,
       blogId: this.$route.params.blogId,
       blogName: '',
-<<<<<<< HEAD
-      images: []
-=======
+      images: [],
       tag: this.$route.params.tag
->>>>>>> newsfeed
     }
   },
   async beforeRouteEnter (to, from, next) {
@@ -67,7 +64,6 @@ export default {
     const [ images ] = await Promise.all([
       api.listImagePostsByBlog(to.params.blogId)
     ])
-
     console.log(images.data)
 
     if (blog.status !== 200) next({ name: 'blogs' })
@@ -78,11 +74,8 @@ export default {
         vm.prevRoutename = 'userBlogs'
       }
       vm.blogName = blog.data.name
-<<<<<<< HEAD
       vm.images = images.data
-=======
       vm.blogTag = blog.data.tag
->>>>>>> newsfeed
     })
   },
   async beforeRouteUpdate (to, from, next) {
