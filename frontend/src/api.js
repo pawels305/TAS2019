@@ -168,5 +168,21 @@ export default {
 
   listImagePostsByBlog (blogID) {
     return this.execute('GET', `/imagepost/${blogID}`)
+  },
+
+  addComment (blogID, data) {
+    return this.execute('POST', `/comments/${blogID}`, data)
+  },
+
+  deleteComment (commentID) {
+    return this.execute('DELETE', `/comments/${commentID}`)
+  },
+
+  listCommentsByBlog (blogID) {
+    return this.execute('GET', `/comments/${blogID}`)
+  },
+
+  updateComment (commentID, data) {
+    return this.execute('PUT', `/comments/${commentID}`, data)
   }
 }

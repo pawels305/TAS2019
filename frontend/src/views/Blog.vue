@@ -42,6 +42,53 @@
         </ul>
       </div>
     </div>
+    <div class="content">
+    <form v-on:submit="addComment()">
+        <input type="text" ref="comment-input" placeholder="Write comment" @change="onTextChange()">
+        <br />
+        <button type="submit">Add comment</button>
+        <br /><br />
+      </form>
+      </div>
+    <div v-if="comments.length !== 0" class="content">
+      <span> Comments </span>
+      <div>
+        <ul>
+          <li v-for="comment in comments" v-bind:key="comment._id">
+              <span>{{ comment.commentBody }}</span>
+              <br />
+              <button @click="deleteComment(comment._id)">Delete comment</button>
+              <br /><br />
+               <div
+                  class="icon far fa-edit"
+                  @click="edit(comment._id)"
+              />
+
+              <div v-if="editComment">
+      <form
+        method="put"
+        @submit.prevent="updateComment"
+        @keyup.native.enter="updateComment"
+      >
+        <h4>Zmien komentarz</h4>
+        <input
+          id="blogName"
+          v-model="editCommentBody"
+          type="text"
+          name="blogName"
+          placeholder="New comment"
+          require
+        >
+        <button type="submit">
+          Dodaj komentarz
+        </button>
+        <br /><br />
+      </form>
+    </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -54,7 +101,11 @@ export default {
       blogId: this.$route.params.blogId,
       blogName: '',
       images: [],
-      tag: this.$route.params.tag
+      tag: this.$route.params.tag,
+      comments: [], 
+      editComment: false,
+      editCommentBody: '',
+      commentID: '',
     }
   },
   async beforeRouteEnter (to, from, next) {
@@ -63,6 +114,10 @@ export default {
     ])
     const [ images ] = await Promise.all([
       api.listImagePostsByBlog(to.params.blogId)
+    ])
+
+    const [ comments ] = await Promise.all([
+      api.listCommentsByBlog(to.params.blogId)
     ])
     console.log(images.data)
 
@@ -76,12 +131,18 @@ export default {
       vm.blogName = blog.data.name
       vm.images = images.data
       vm.blogTag = blog.data.tag
+      vm.comments = comments.data
     })
   },
   async beforeRouteUpdate (to, from, next) {
     const [ blog ] = await Promise.all([
       api.getBlog(to.params.blogId)
     ])
+
+    const [ comments ] = await Promise.all([
+      api.listCommentsByBlog(to.params.blogId)
+    ])
+
     // const [ images ] = await Promise.all([
     //   api.listImagePostsByBlog(to.params.blogId)
     // ])
@@ -149,6 +210,42 @@ export default {
       if (image.status !== 200) console.log(image.request)
       // console.log(this.images.length)
       window.location.reload()
+    },
+
+    edit (commentId) {
+      this.commentID = commentId
+      this.editComment = true
+    },
+
+    async addComment () {
+      let data = {
+      'commentBody': this.$refs["comment-input"].value
+      }
+
+      const [ comment ] = await api.addComment([
+        api.addComment(this.blogId, data)
+      ])
+      if (comment.status !== 200) console.log(comment.request)
+      window.location.reload()
+    },
+
+    async deleteComment(id) {
+      const [ comment ] = await Promise.all([
+        api.deleteComment(id)
+      ])
+      if (comment.status !== 200) console.log(comment.request)
+      window.location.reload()
+    },
+
+    async updateComment () {
+      const response = await api.updateComment(this.commentID, { commentBody: this.editCommentBody })
+      if (response.status === 200) {
+        const index = this.comments.findIndex(comment => comment._id === this.commentID)
+        this.comments[index].commentBody = this.editCommentBody
+        this.editCommentBody = ''
+        this.commentID = ''
+        this.editComment = false
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ const express = require('express')
 const auth = require('./users')
 const blog = require('./blog')
 const imagePost = require('./imagepost')
+const comments = require('./comments')
 
 const verifyLogin = require('../middleware/verifyLogin')
 
@@ -32,5 +33,10 @@ router.post('/imagepost/:blogId', verifyLogin, imagePost.insert)
 router.put('/imagepost/:imagepostId', verifyLogin, imagePost.update)
 router.delete('/imagepost/:imagepostId', verifyLogin, imagePost.delete)
 router.get('/imagepost/:blogId', verifyLogin, imagePost.list)
+
+router.post('/comments/:blogId', verifyLogin, comments.insert)
+router.delete('/comments/:commentId', verifyLogin, comments.delete)
+router.get('/comments/:blogId', verifyLogin, comments.list)
+router.put('/comments/:commentId', verifyLogin, comments.update)
 
 module.exports = router
